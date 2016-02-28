@@ -16,11 +16,8 @@ public final class SecondPartTasks {
     private SecondPartTasks() {
     }
 
-    private static final int maxNumber = 1000000;
-
-    private static final double nextRandDouble() {
-        return Math.pow((new Random()).nextDouble() - 0.5, 2);
-    }
+    private static final int MAX_NUMBER = 1000000;
+    private static final Random RANDOM = new Random();
 
     // Найти строки из переданных файлов, в которых встречается указанная подстрока.
     public static List<String> findQuotes(List<String> paths, CharSequence sequence) {
@@ -32,7 +29,7 @@ public final class SecondPartTasks {
                     throw new UncheckedIOException("No file", e);
                 }
             }).filter(s -> s.contains(sequence)).collect(Collectors.toList());
-        } catch (Exception e) {
+        } catch (UncheckedIOException e) {
             e.printStackTrace();
         }
         return null;
@@ -42,9 +39,9 @@ public final class SecondPartTasks {
     // Стрелок атакует мишень и каждый раз попадает в произвольную точку квадрата.
     // Надо промоделировать этот процесс с помощью класса java.util.Random и посчитать, какова вероятность попасть в мишень.
     public static double piDividedBy4() {
-        return Stream.generate(() -> nextRandDouble() + nextRandDouble())
-                .limit(maxNumber)
-                .filter(n -> n <= 0.25).count() * 1.0 / maxNumber;
+        return Stream.generate(() -> Math.pow(RANDOM.nextDouble() - 0.5, 2) + Math.pow(RANDOM.nextDouble() - 0.5, 2))
+                .limit(MAX_NUMBER)
+                .filter(n -> n <= 0.25).count() * 1.0 / MAX_NUMBER;
 
     }
 
@@ -69,7 +66,7 @@ public final class SecondPartTasks {
                         Map.Entry::getKey,
                         Map.Entry::getValue,
                         (a1, a2) -> a1 + a2
-        ));
+                ));
 
     }
 }

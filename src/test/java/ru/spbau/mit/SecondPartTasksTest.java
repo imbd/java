@@ -12,7 +12,7 @@ public class SecondPartTasksTest {
     @Test
     public void testFindQuotes() {
         List<String> correct = Arrays.asList("asdjsaopa", "  opa ppb", "opa", "sdjhfopaf", "opapapa");
-        List<String> directory = Arrays.asList("src/test/resources/findQuotes.txt","src/test/resources/findQuotes2.txt");
+        List<String> directory = Arrays.asList("src/test/resources/findQuotes.txt", "src/test/resources/findQuotes2.txt");
         List<String> myAnswer = findQuotes(directory, "opa");
         Collections.sort(correct);
         Collections.sort(myAnswer);
@@ -22,7 +22,7 @@ public class SecondPartTasksTest {
     @Test
     public void testPiDividedBy4() {
 
-        assertEquals(piDividedBy4(), Math.PI/4, 0.01);
+        assertEquals(piDividedBy4(), Math.PI / 4, 0.01);
     }
 
     @Test
@@ -40,10 +40,10 @@ public class SecondPartTasksTest {
         Map<String, List<String>> compositions = new HashMap<>();
         compositions.put("Author1", Arrays.asList(author1text1, author1text2));
         compositions.put("Author2", Arrays.asList(author2text1, author2text2, author2text3, author2text4, author2text5, author2text6));
-        compositions.put("Author3", Arrays.asList(author3text1));
+        compositions.put("Author3", Collections.singletonList(author3text1));
 
         assertEquals("Author1", findPrinter(compositions));
-        assertEquals(null, findPrinter( new HashMap<>()));
+        assertEquals(null, findPrinter(Collections.emptyMap()));
     }
 
     @Test
@@ -75,7 +75,6 @@ public class SecondPartTasksTest {
         all.put("smth", 12345);
 
         assertEquals(all, calculateGlobalOrder(Arrays.asList(order1, order2, order3)));
-        assertEquals(all, calculateGlobalOrder(Arrays.asList(all)));
-        assertEquals(new HashMap<>(), calculateGlobalOrder(new ArrayList<>()));
+        assertEquals(Collections.emptyMap(), calculateGlobalOrder(Collections.emptyList()));
     }
 }
