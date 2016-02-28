@@ -26,7 +26,7 @@ public final class SecondPartTasks {
                 try {
                     return Files.lines(Paths.get(path));
                 } catch (IOException e) {
-                    throw new UncheckedIOException("No file", e);
+                    throw new UncheckedIOException("No file: ", e);
                 }
             }).filter(s -> s.contains(sequence)).collect(Collectors.toList());
         } catch (UncheckedIOException e) {
